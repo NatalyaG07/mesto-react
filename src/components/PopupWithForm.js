@@ -2,7 +2,7 @@ import '../index.css';
 
 function PopupWithForm(props) {
   return(
-    <div className={props.isOpen ? `popup popup_${props.name} popup_active` : `popup popup_${props.name}`}>
+    <div className={props.card ? `popup popup_${props.name} popup_active` : `popup popup_${props.name}`}>
       <div className="popup__content">
         <button className="popup__close" type="button" onClick={props.onClose}></button>
         <h2 className="popup__title">{props.title}</h2>

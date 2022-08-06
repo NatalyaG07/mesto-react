@@ -19,14 +19,6 @@ function Main(props) {
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
         setCards(cards);
-
-      //   // тут установка данных пользователя
-      //   userInfo.setUserInfo({ name: userData.name, information: userData.about, avatar: userData.avatar });
-      //   myId = userData._id;
-
-      //   // и тут отрисовка карточек
-      //   const initialCards = cards;
-      //   section.renderItems(initialCards);
       })
       .catch(err => {
         console.log(err);

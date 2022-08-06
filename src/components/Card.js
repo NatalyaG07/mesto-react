@@ -6,7 +6,7 @@ function Card(props) {
   }
 
   return(
-    <li className="elements__iteam">
+    <article className="elements__iteam">
       <img className="elements__img" src={props.link} alt={props.name} onClick={handleClick} /> 
       <button className="elements__remove" type="button" aria-label="Удалить"></button>
       <div className="elements__info">
@@ -16,7 +16,7 @@ function Card(props) {
           <h3 className="elements__like-counter">{props.likes}</h3>
         </div>
       </div>
-    </li>
+    </article>
   )
 }
 

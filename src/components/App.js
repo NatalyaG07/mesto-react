@@ -12,7 +12,7 @@ function App() {
   const [isEditProfilePopupOpen, satIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, satIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, satIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   function handleEditProfileClick() {
     satIsEditProfilePopupOpen(true);
@@ -34,19 +34,10 @@ function App() {
   }
 
   function closeAllPopups() {
-    if(isEditProfilePopupOpen) {
-      satIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    } else if(isAddPlacePopupOpen) {
-      satIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-    } else if (isEditAvatarPopupOpen) {
-      satIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-    } else if (selectedCard) {
-      setSelectedCard(!selectedCard);
-    }
-    // satIsEditProfilePopupOpen(false);
-    // satIsAddPlacePopupOpen(false);
-    // satIsEditAvatarPopupOpen(false);
-    // setSelectedCard(null);
+    satIsEditProfilePopupOpen(false);
+    satIsAddPlacePopupOpen(false);
+    satIsEditAvatarPopupOpen(false);
+    setSelectedCard({});
   }
 
   return (
@@ -65,7 +56,7 @@ function App() {
             required
             minLength="2"
             maxLength="40"
-            placeholder=" " />
+            placeholder="Имя" />
           <label htmlFor="name-input"><span className="popup__error" id="name-input-error"></span></label>
           <input
             id="information-input"
@@ -74,7 +65,7 @@ function App() {
             name="information"
             required minLength="2"
             maxLength="200"
-            placeholder=" " />
+            placeholder="О себе" />
           <label htmlFor="information-input"><span className="popup__error" id="information-input-error"></span></label>
         </>}
       />
@@ -117,7 +108,7 @@ function App() {
         </>} 
       />
 
-      <ImagePopup name="img-card" card={selectedCard} isOpen={selectedCard} onClose={closeAllPopups} />
+      <ImagePopup name="img-card" card={selectedCard} onClose={closeAllPopups} />
 
       {/* 
 
