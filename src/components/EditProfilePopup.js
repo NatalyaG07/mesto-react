@@ -1,4 +1,4 @@
-import React from 'react';
+import {useEffect, useState, useContext} from 'react';
 import '../index.css';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -6,8 +6,8 @@ import PopupWithForm from './PopupWithForm';
 
 function EditProfilePopup(props) {
 
-  const [name, setName] = React.useState('');
-  const [description , setDescription] = React.useState('');
+  const [name, setName] = useState('');
+  const [description , setDescription] = useState('');
 
   // Обработчик изменения инпута обновляет стейт
   function handleChangeName(e) {
@@ -18,14 +18,14 @@ function EditProfilePopup(props) {
     setDescription(e.target.value);
   }
 
-const currentUser = React.useContext(CurrentUserContext);
+const currentUser = useContext(CurrentUserContext);
 
 // После загрузки текущего пользователя из API
 // его данные будут использованы в управляемых компонентах.
-React.useEffect(() => {
+useEffect(() => {
   setName(currentUser.name);
   setDescription(currentUser.about);
-}, [currentUser]);
+}, [currentUser, props.isOpen]);
 
 function handleSubmit(e) {
   // Запрещаем браузеру переходить по адресу формы
@@ -39,35 +39,33 @@ function handleSubmit(e) {
 }
 
   return(
-    <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonText="Сохранить" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}
-      children={<>
-        <input
-          id="name-input"
-          className="popup__input popup__input_type_name"
-          type="text"
-          name="name"
-          required
-          minLength="2"
-          maxLength="40"
-          placeholder="Имя"
-          value={name || ''}
-          onChange={handleChangeName}
+    <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonText="Сохранить" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
+      <input
+        id="name-input"
+        className="popup__input popup__input_type_name"
+        type="text"
+        name="name"
+        required
+        minLength="2"
+        maxLength="40"
+        placeholder="Имя"
+        value={name || ''}
+        onChange={handleChangeName}
+      />
+      <label htmlFor="name-input"><span className="popup__error" id="name-input-error"></span></label>
+      <input
+        id="information-input"
+        className="popup__input popup__input_type_information"
+        type="text"
+        name="information"
+        required minLength="2"
+        maxLength="200"
+        placeholder="О себе"
+        value={description || ''}
+        onChange={handleChangeDescription}
         />
-        <label htmlFor="name-input"><span className="popup__error" id="name-input-error"></span></label>
-        <input
-          id="information-input"
-          className="popup__input popup__input_type_information"
-          type="text"
-          name="information"
-          required minLength="2"
-          maxLength="200"
-          placeholder="О себе"
-          value={description || ''}
-          onChange={handleChangeDescription}
-          />
-        <label htmlFor="information-input"><span className="popup__error" id="information-input-error"></span></label>
-      </>}
-    />
+      <label htmlFor="information-input"><span className="popup__error" id="information-input-error"></span></label>
+    </PopupWithForm>
   )
 }
 

@@ -24,8 +24,7 @@ function Main(props) {
 
       <section className="elements">
         <ul className="elements__team">
-        {props.cards &&
-            props.cards.map((card) => {
+        {props.cards?.map((card) =>  {
               return (
                 <Card 
                 card={card} 
